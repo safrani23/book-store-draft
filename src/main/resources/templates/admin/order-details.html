@@ -35,13 +35,17 @@
     <h2 th:text="'Заказ № ' + ${header.getNumber()}" th:href="@{/admin/order/{id}(id=${header.getId()})}"></h2>
     <p th:text="'Дата заказа: ' + ${#temporals.format(header.getDateTime(), 'dd-MMM-yyyy')}"></p>
 
-    <p th:text="'Пользователь: ' + ${header.getUser().getUsername()}"></p>
-    <p th:text="'Email: ' + ${header.getUser().getEmail()}"></p>
-    <p th:text="'Телефон: ' + ${header.getUser().getPhone_number()}"></p>
+    <p th:text="'Пользователь: ' + ${header.getUser().getUsername()}"
+       th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}"></p>
+    <p th:text="'Email: ' + ${header.getUser().getEmail()}"
+       th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}"></p>
+    <p th:text="'Телефон: ' + ${header.getUser().getPhone_number()}"
+       th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}"></p>
 
     <p th:text="'Статус: ' + ${header.getStatus().getTitle()}"></p>
 
-    <form th:method="POST" th:action="@{/admin/order/{id}(id=${header.getId()})}" th:object="${order}">
+    <form th:method="POST" th:action="@{/admin/order/{id}(id=${header.getId()})}" th:object="${order}"
+          th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
         <div th:each="change : ${order}">
 
             <input type="hidden" th:name="user" th:value="${change.getUser().getId()}">
@@ -50,12 +54,12 @@
 
             <input type="hidden" th:name="number" th:value="${change.getNumber()}">
 
-            <label>Изменить статус:
-                <select>
+            <label>Изменить статус:</label>
+                <select th:field="*{status}">
                     <option th:each="status : ${T(com.example.bookstore.models.Status).values()}"
-                            th:value="${status}" th:name="status" th:text="${status.title}"></option>
+                            th:value="${status}" th:name="status" th:text="${status.getTitle()}" th:id="${status}"></option>
                 </select>
-            </label>
+
             <input class="add_btn" type="submit" value="Сохранить"/>
         </div>
     </form>

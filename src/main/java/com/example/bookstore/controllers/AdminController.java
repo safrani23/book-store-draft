@@ -72,7 +72,7 @@ public class AdminController {
             @ModelAttribute("order") Order order,
             @PathVariable("id") int id){
         orderService.updateOrderStatus(id, order);
-        return "redirect:/order-details";
+        return "redirect:/admin/orders";
     }
 
     @GetMapping("/admin/order/search")
