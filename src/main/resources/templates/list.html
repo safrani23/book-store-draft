@@ -113,6 +113,10 @@
     }
 
     .product_title a {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        align-items: center;
         font-family: "Segoe UI", sans-serif;
         color: #A58CE1;
         font-size: 20px;
@@ -125,6 +129,10 @@
     }
 
     .product_title {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        align-items: center;
         font-family: "Segoe UI", sans-serif;
         color: #A58CE1;
         font-size: 20px;
@@ -133,17 +141,6 @@
         padding-top: 10px;
         padding-bottom: 10px;
         text-decoration: none;
-    }
-
-    .product_author a {
-        font-family: "Segoe UI", sans-serif;
-        text-decoration: none;
-        color: #74A6B4;
-        font-size: 18px;
-        text-align: center;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        cursor: pointer;
     }
 
     .product_author {
@@ -246,7 +243,7 @@
         <div th:each="img : ${product.getImageList()}" class="product_img_block">
             <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" class="product_img">
         </div>
-        <div class='product_card_info'>
+        <div class="product_card_info">
             <a th:text="${product.getTitle()}" th:href="@{/catalog/item/{id}(id=${product.getId()})}" class="product_title"></a>
             <div th:text="${product.getAuthor()}" class="product_author"></div>
             <div class="land_view_wrapper">

@@ -32,11 +32,13 @@
     </nav>
 </header>
 <body>
+<h1>Профиль пользователя</h1>
+<hr><br>
 <div th:each="user : ${userProfile}">
   <div>
-    <p th:text="'Имя пользователя: ' + ${user.getUsername()}"></p><br>
-    <p th:text="'Электронная почта: ' + ${user.getEmail()}"></p><br>
-    <p th:text="'Телефон: ' + ${user.getPhone_number()}"></p><br>
+    <div th:text="'Имя пользователя: ' + ${user.getUsername()}"></div><br>
+    <div th:text="'Электронная почта: ' + ${user.getEmail()}"></div><br>
+    <div th:text="'Телефон: ' + ${user.getPhone_number()}"></div><br>
   </div>
   <hr>
 </div>

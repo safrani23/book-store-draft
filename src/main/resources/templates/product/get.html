@@ -3,21 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
-    <title></title>
+    <title>Подробнее о товаре</title>
 </head>
+<style>
+    body{
+        max-width: 1150px;
+        margin: 0 auto;
+        font-family: "Segoe UI", sans-serif;
+    }
+
+    h1{
+        font-family: "Segoe UI", sans-serif;
+        font-size: 28px;
+        color: #7658BF;
+    }
+
+</style>
 <body>
-    <div th:each="product : ${item}" class="product_card">
-        <span th:text="'Код товара: ' + ${product.getCode()}" class="product_code"></span>
+<h1>Подробнее о товаре</h1>
+<hr><br>
+    <div th:each="product : ${item}">
+        <div th:each="img : ${product.getImageList()}">
+            <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" height="300px">
+        </div>
+        <span th:text="'Код товара: ' + ${product.getCode()}"></span>
         <h1 th:text="${product.getTitle()}"></h1>
         <h2 th:text="${product.getAuthor()}"></h2>
         <hr>
-        <div th:each="img : ${product.getImageList()}" class="product_img_block">
-            <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" class="product_img" height="200px">
-        </div>
-        <div th:text="${product.getPublishing_house()}" class="product_publishing_house"></div><br>
-        <div th:text="${product.getYear_of_publishing()}" class="product_year_of_publishing"></div><br>
-        <div th:text="${product.getDescription()}" class="product_description"></div><br>
-        <div th:text="${product.getPrice()}" class="product_price"></div>
+        <div th:text="'Издательство: ' + ${product.getPublishing_house()}" ></div><br>
+        <div th:text="'Год издания: ' + ${product.getYear_of_publishing()}" ></div><br>
+        <div th:text="'Аннотация: ' + ${product.getDescription()}"></div><br>
+        <div th:text="'Цена: ' + ${product.getPrice()}" ></div>
     </div>
+<hr>
 </body>
 </html>

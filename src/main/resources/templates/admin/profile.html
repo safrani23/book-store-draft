@@ -29,26 +29,25 @@
     </nav>
 </header>
 <body>
-<h1>Профиль пользователя: режим редактирования</h1>
+<h1>Карточка пользователя: режим редактирования</h1>
 <hr>
 <div>
     <form th:method="POST" th:action="@{/user/{id}(id=${userEdit.getId()})}" th:object="${userEdit}">
         <div th:each="user : ${userEdit}">
             <label for="username">Имя пользователя</label>
             <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
-            <input type="text" th:field="*{username}" placeholder="Введите имя пользователя" name="username" id="username" required/><br>
+            <input class="input_space" type="text" th:field="*{username}" placeholder="Введите имя пользователя" name="username" id="username" required/><br>
 
             <label for="email">Электронная почта</label>
             <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-            <input type="text" th:field="*{email}" placeholder="Введите электронную почту" name="email" id="email" required/><br>
+            <input class="input_space" type="text" th:field="*{email}" placeholder="Введите электронную почту" name="email" id="email" required/><br>
 
             <label for="phone_number">Номер телефона</label>
             <div th:if="${#fields.hasErrors('phone_number')}" th:errors="*{phone_number}"></div>
-            <input type="text" th:field="*{phone_number}" placeholder="Введите номер телефона" name="phone_number" id="phone_number" required/><br>
+            <input class="input_space" type="text" th:field="*{phone_number}" placeholder="Введите номер телефона" name="phone_number" id="phone_number" required/><br>
             <div th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
-                <span>Текущая роль пользователя: </span>
-                <label>
-                    <select th:field="*{role}" name="role" id="role">
+                <label>Текущая роль пользователя:
+                    <select class="input_space options" th:field="*{role}" name="role" id="role">
                         <option disabled selected th:value="${user.getRole()}"></option>
                         <option th:value="ROLE_ADMIN">Администратор</option>
                         <option th:value="ROLE_USER">Пользователь</option>
@@ -67,8 +66,8 @@
 
         </div>
         <div>
-            <input type="submit" value="Сохранить"/><br><br>
-            <a th:href="@{/users}">Отменить</a>
+            <input class="add_btn" type="submit" value="Сохранить"/><br><br>
+            <a th:href="@{/users}" class="add_btn">Отменить</a>
         </div>
     </form>
 </div>

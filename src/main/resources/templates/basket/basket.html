@@ -6,6 +6,41 @@
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
     <title>Корзина</title>
 </head>
+<style>
+    body{
+        max-width: 1150px;
+        margin: 0 auto;
+        font-family: "Segoe UI", sans-serif;
+    }
+
+    h1{
+        font-family: "Segoe UI", sans-serif;
+        font-size: 28px;
+        color: #7658BF;
+    }
+
+    .add_btn{
+        font-size: 20px;
+        font-weight: bold;
+        color: #ffffff;
+        background-color: #7658BF;
+        border-radius: 10px;
+        border: none;
+        height: 40px;
+        cursor: pointer;
+        transition: box-shadow 0.1s ease-out;
+        padding: 5px 15px;
+    }
+
+    .add_btn:hover{
+        box-shadow: 0 0 5px #A08FC8;
+    }
+
+    .add_btn:active{
+        box-shadow: none;
+    }
+
+</style>
 <header>
     <form th:method="GET" th:action="@{/index}">
         <input class="logo" type="submit" value="Book Store">
@@ -38,16 +73,17 @@
     <div th:each="img : ${product.getImageList()}">
         <img th:src="'/img/' + ${img.getFileName()}" height="280px" alt="product_img">
     </div>
-    <a th:text="${product.getTitle()}" th:href="@{/catalog/item/{id}(id=${product.getId()})}"></a><br>
-    <p th:text="${product.getAuthor()}"></p><br>
-    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+    <div th:text="${product.getTitle()}" th:href="@{/catalog/item/{id}(id=${product.getId()})}"></div><br>
+    <div th:text="${product.getAuthor()}"></div><br>
+    <div th:text="'Цена: ' + ${product.getPrice()}"></div><br>
     <form th:method="GET" th:action="@{/basket/{id}/delete(id=${product.getId()})}">
-        <button>Удалить</button>
+        <button class="add_btn">Удалить</button>
     </form>
     <hr>
 </div>
+<br>
 <form th:method="GET" th:action="@{/order/create}">
-    <button>Оформить заказ</button>
+    <button class="add_btn">Оформить заказ</button>
 </form>
 </body>
 </html>
