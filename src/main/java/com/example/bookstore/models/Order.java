@@ -15,34 +15,24 @@ public class Order {
     private String number;
 
     @ManyToOne(optional = false)
-    private Product product;
-
-    @ManyToOne(optional = false)
     private User user;
-
-    private int count;
-    private float price;
 
     private LocalDateTime dateTime;
 
     private Status status;
 
-    // Будем заполнять дату и время при создании объекта класса
-    @PrePersist
-    private void init(){
-        dateTime = LocalDateTime.now();
-    }
-
     public Order() {
     }
 
-    public Order(String number, Product product, User user, int count, float price, Status status) {
+    public Order(String number, User user, Status status) {
         this.number = number;
-        this.product = product;
         this.user = user;
-        this.count = count;
-        this.price = price;
         this.status = status;
+    }
+
+    @PrePersist
+    private void init(){
+        dateTime = LocalDateTime.now();
     }
 
     public int getId() {
@@ -61,36 +51,12 @@ public class Order {
         this.number = number;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
     }
 
     public LocalDateTime getDateTime() {
