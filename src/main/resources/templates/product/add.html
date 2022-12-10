@@ -136,7 +136,7 @@
         box-shadow: none;
     }
 
-    .input__wrapper {
+    .input_wrapper {
         margin-bottom: 20px;
     }
 
@@ -229,7 +229,7 @@
                 <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
                 <input class="input_space" type="number" min="1" step="1" value="0" th:field="*{price}" name="price" id="price" required/><br>
 
-                <div class="input__wrapper">
+                <div class="input_wrapper">
                     <input name="file" type="file" id="file" class="input_file">
                     <label for="file" class="input_file-button">
                         <span class="input_file-button-text">Загрузите фотографии товара</span>

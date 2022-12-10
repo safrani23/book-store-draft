@@ -3,12 +3,10 @@ package com.example.bookstore.controllers;
 import com.example.bookstore.models.Image;
 import com.example.bookstore.models.Product;
 import com.example.bookstore.repositories.CategoryRepository;
-import com.example.bookstore.security.UserDetails;
+import com.example.bookstore.repositories.ImageRepository;
 import com.example.bookstore.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -28,14 +27,17 @@ public class ProductController {
 
     private final ProductService productService;
     private final CategoryRepository categoryRepository;
+    private final ImageRepository imageRepository;
 
 
     @Autowired
     public ProductController(
             ProductService productService,
-            CategoryRepository categoryRepository) {
+            CategoryRepository categoryRepository,
+            ImageRepository imageRepository) {
         this.productService = productService;
         this.categoryRepository = categoryRepository;
+        this.imageRepository = imageRepository;
     }
 
     @GetMapping("/catalog")
@@ -93,25 +95,10 @@ public class ProductController {
     @PostMapping("/product/{id}/edit")
     public String productEdit(@ModelAttribute("productEdit")
                               @Valid Product product, BindingResult bindingResult,
-                              @PathVariable("id") int id,
-                              @RequestParam("file") MultipartFile file) throws IOException {
+                              @PathVariable("id") int id) {
         productService.updateProduct(id, product);
         if (bindingResult.hasErrors()) {
             return "redirect:/product/{id}/edit";
-        }
-        if (file != null) {
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-            String uuidFile = UUID.randomUUID().toString(); // уникальное имя файла
-            String resultFileName = uuidFile + "." + file.getOriginalFilename();
-            file.transferTo(new File(uploadPath + "/" + resultFileName));
-
-            Image image = new Image();
-            image.setProduct(product);
-            image.setFileName(resultFileName);
-            product.addImage(image);
         }
         return "redirect:/catalog";
     }

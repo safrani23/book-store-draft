@@ -136,7 +136,7 @@
         box-shadow: none;
     }
 
-    .input__wrapper {
+    .input_wrapper {
         margin-bottom: 20px;
     }
 
@@ -190,82 +190,59 @@
 <body>
 <h1>Форма редактирования товара</h1>
 <hr>
-<form th:method="POST" th:action="@{/product/{id}/edit(id=${productEdit.getId()})}" th:object="${productEdit}"
-      enctype="multipart/form-data">
-    <div th:each="product : ${productEdit}">
+    <form th:method="POST" th:action="@{/product/{id}/edit(id=${productEdit.getId()})}" th:object="${productEdit}"
+          enctype="multipart/form-data">
 
-        <label for="category"></label>
-        <select class="input_space options" name="category" th:field="*{category}" id="category">
-            <div th:each="element : ${category}">
-                <option th:text="${element.getName()}" th:value="${element.getId()}"></option>
+        <div th:each="product : ${productEdit}">
+
+            <label for="category"></label>
+            <select class="input_space options" name="category" th:field="*{category}" id="category">
+                <div th:each="element : ${category}">
+                    <option th:text="${element.getName()}" th:value="${element.getId()}"></option>
+                </div>
+            </select><br>
+
+            <div>
+
+                <label for="code">Код товара:</label><br>
+                <div style="color: red" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
+                <input class="input_space" type="number" th:field="*{code}" placeholder="Введите код товара" name="code"
+                       id="code" required/><br>
+
+                <label for="title">Заголовок:</label><br>
+                <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                <input class="input_space" type="text" th:field="*{title}" placeholder="Введите название" name="title"
+                       id="title" required/><br>
+
+                <label for="author">Автор:</label><br>
+                <div style="color: red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
+                <input class="input_space" type="text" th:field="*{author}" placeholder="Введите автора" name="author"
+                       id="author" required/><br>
+
+                <label for="description">Аннотация:</label><br>
+                <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+                <textarea class="input_space" th:field="*{description}" placeholder="Введите аннотацию" name="description"
+                          id="description" required></textarea><br>
+
+                <label for="publishing_house">Издательство:</label><br>
+                <div style="color: red" th:if="${#fields.hasErrors('publishing_house')}"
+                     th:errors="*{publishing_house}"></div>
+                <input class="input_space" type="text" th:field="*{publishing_house}" placeholder="Введите издательство"
+                       name="publishing_house" id="publishing_house" required/><br>
+
+                <label for="year_of_publishing">Год издания:</label><br>
+                <div style="color: red" th:if="${#fields.hasErrors('year_of_publishing')}"
+                     th:errors="*{year_of_publishing}"></div>
+                <input class="input_space" type="number" min="1900" max="2099" step="1" value="2022"
+                       th:field="*{year_of_publishing}" name="year_of_publishing" id="year_of_publishing" required/><br>
+
+                <label for="price">Цена (руб.):</label><br>
+                <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+                <input class="input_space" type="number" min="1" step="1" value="0" th:field="*{price}" name="price"
+                       id="price" required/><br>
             </div>
-        </select><br>
-
-        <div>
-
-            <label for="code">Код товара:</label><br>
-            <div style="color: red" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
-            <input class="input_space" type="number" th:field="*{code}" placeholder="Введите код товара" name="code"
-                   id="code" required/><br>
-
-            <label for="title">Заголовок:</label><br>
-            <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
-            <input class="input_space" type="text" th:field="*{title}" placeholder="Введите название" name="title"
-                   id="title" required/><br>
-
-            <label for="author">Автор:</label><br>
-            <div style="color: red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
-            <input class="input_space" type="text" th:field="*{author}" placeholder="Введите автора" name="author"
-                   id="author" required/><br>
-
-            <label for="description">Аннотация:</label><br>
-            <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
-            <textarea class="input_space" th:field="*{description}" placeholder="Введите аннотацию" name="description"
-                      id="description" required></textarea><br>
-
-            <label for="publishing_house">Издательство:</label><br>
-            <div style="color: red" th:if="${#fields.hasErrors('publishing_house')}"
-                 th:errors="*{publishing_house}"></div>
-            <input class="input_space" type="text" th:field="*{publishing_house}" placeholder="Введите издательство"
-                   name="publishing_house" id="publishing_house" required/><br>
-
-            <label for="year_of_publishing">Год издания:</label><br>
-            <div style="color: red" th:if="${#fields.hasErrors('year_of_publishing')}"
-                 th:errors="*{year_of_publishing}"></div>
-            <input class="input_space" type="number" min="1900" max="2099" step="1" value="2022"
-                   th:field="*{year_of_publishing}" name="year_of_publishing" id="year_of_publishing" required/><br>
-
-            <label for="price">Цена (руб.):</label><br>
-            <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
-            <input class="input_space" type="number" min="1" step="1" value="0" th:field="*{price}" name="price"
-                   id="price" required/><br>
-
-            <div class="input__wrapper">
-                <input name="file" type="file" id="file" class="input_file" multiple>
-                <label for="file" class="input_file-button">
-                    <span class="input_file-button-text">Загрузите фотографии товара</span>
-                </label>
-            </div>
+            <input class="add_btn" type="submit" value="Сохранить"/>
         </div>
-        <input class="add_btn" type="submit" value="Сохранить"/>
-</form>
+    </form>
 </body>
-<script>
-    let inputs = document.querySelectorAll('.input_file');
-    Array.prototype.forEach.call(inputs, function (input) {
-        let label = input.nextElementSibling,
-            labelVal = label.querySelector('.input_file-button-text').innerText;
-
-        input.addEventListener('change', function (e) {
-            let countFiles = '';
-            if (this.files && this.files.length >= 1)
-                countFiles = this.files.length;
-
-            if (countFiles)
-                label.querySelector('.input_file-button-text').innerText = 'Выбрано файлов: ' + countFiles;
-            else
-                label.querySelector('.input_file-button-text').innerText = labelVal;
-        });
-    });
-</script>
 </html>

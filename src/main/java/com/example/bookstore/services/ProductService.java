@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
@@ -40,7 +42,6 @@ public class ProductService {
     public void updateProduct(int id, Product product){
         product.setId(id);
         product.setDateTime(LocalDateTime.now());
-        product.addImage(new Image());
         productRepository.save(product); // обновить продукт в репозитории
     }
 
@@ -48,6 +49,4 @@ public class ProductService {
     public void removeProduct(int id){
         productRepository.deleteById(id); // удалить продукт из репозитория
     }
-
-
 }

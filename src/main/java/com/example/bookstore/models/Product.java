@@ -48,6 +48,10 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Image> imageList = new ArrayList<>();
 
+
+    public Product() {
+    }
+
     public void addImage(Image image){
         image.setProduct(this);
         imageList.add(image);
