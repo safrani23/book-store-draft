@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="../../static/css/index.css" th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
+    <title>Список заказов</title>
+</head>
+<header>
+    <form th:method="GET" th:action="@{/index}">
+        <input class="logo" type="submit" value="Book Store">
+    </form>
+    <nav>
+        <form th:method="GET" th:action="@{/search}">
+            <input class="navigation" type="submit" value="ПОИСК">
+        </form>
+        <form th:method="GET" th:action="@{/catalog}">
+            <input class="navigation" type="submit" value="КАТАЛОГ">
+        </form>
+        <form th:method="GET" th:action="@{/basket}">
+            <input class="navigation" type="submit" value="КОРЗИНА">
+        </form>
+        <form th:method="GET" th:action="@{/orders}">
+            <input class="navigation selected" type="submit" value="ЗАКАЗЫ">
+        </form>
+        <form th:method="GET" th:action="@{/profile}">
+            <input class="navigation" type="submit" value="ПРОФИЛЬ">
+        </form>
+        <form th:method="POST" th:action="@{/logout}">
+            <input class="navigation" type="submit" value="ВЫХОД">
+        </form>
+    </nav>
+</header>
+<body>
+<h1>Заказы</h1>
+<hr>
+<div th:each="order : ${orders}">
+    <div>
+        <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
+        <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
+        <p th:text="'Статус: ' + ${order.getStatus()}">
+    <hr>
+        <div>
+            <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="150px">
+            <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
+            <p th:text="'Количество: ' + ${order.getCount()}"></p>
+            <p th:text="'Цена: ' + ${order.getPrice()}"></p>
+        </div>
+
+    </div>
+    <hr>
+
+</div>
+</body>
+</html>

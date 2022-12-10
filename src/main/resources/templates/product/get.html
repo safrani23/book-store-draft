@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
+    <title></title>
+</head>
+<body>
+    <div th:each="product : ${item}" class="product_card">
+        <span th:text="'Код товара: ' + ${product.getCode()}" class="product_code"></span>
+        <h1 th:text="${product.getTitle()}"></h1>
+        <h2 th:text="${product.getAuthor()}"></h2>
+        <hr>
+        <div th:each="img : ${product.getImageList()}" class="product_img_block">
+            <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" class="product_img">
+        </div>
+        <div th:text="${product.getPublishing_house()}" class="product_publishing_house"></div><br>
+        <div th:text="${product.getYear_of_publishing()}" class="product_year_of_publishing"></div><br>
+        <div th:text="${product.getDescription()}" class="product_description"></div><br>
+        <div th:text="${product.getPrice()}" class="product_price"></div>
+    </div>
+</body>
+</html>

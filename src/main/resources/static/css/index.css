@@ -1,0 +1,66 @@
+body{
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    background-color: #7658BF;
+    align-content: center;
+    justify-content: end;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    justify-self: end;
+    align-self: center;
+    grid-gap: 20px;
+}
+
+.navigation {
+    font-size: 18px;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    background-color: #7658BF;
+    cursor: pointer;
+    transition: box-shadow 0.4s ease-in;
+    padding: 5px 15px;
+}
+
+.navigation:hover {
+    font-size: 19px;
+    border-radius: 10px;
+    border: solid 1px #ffffff;
+    box-shadow: 0 0 5px #ffffff;
+}
+
+.selected {
+    font-size: 19px;
+    border-radius: 10px;
+    border: solid 1px #B9A9FDFF;
+    box-shadow: 0 0 5px #B9A9FDFF;
+}
+
+.navigation:focus{
+    border-radius: 10px;
+    border: solid 1px #ffffff;
+    box-shadow: none;
+}
+
+.logo {
+    color: #ffff;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    justify-self: start;
+    background: none;
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

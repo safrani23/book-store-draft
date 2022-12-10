@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="../../static/css/index.css" th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
+    <title>Карточка пользователя</title>
+</head>
+<header>
+    <form th:method="GET" th:action="@{/index}">
+        <input class="logo" type="submit" value="Book Store">
+    </form>
+    <nav>
+        <form th:method="GET" th:action="@{/search}">
+            <input class="navigation" type="submit" value="ПОИСК">
+        </form>
+        <form th:method="GET" th:action="@{/catalog}">
+            <input class="navigation" type="submit" value="КАТАЛОГ">
+        </form>
+        <form th:method="GET" th:action="@{/admin/orders}">
+            <input class="navigation" type="submit" value="ЗАКАЗЫ">
+        </form>
+        <form th:method="GET" th:action="@{/users}">
+            <input class="navigation" type="submit" value="ПОЛЬЗОВАТЕЛИ">
+        </form>
+        <form th:method="POST" th:action="@{/logout}">
+            <input class="navigation" type="submit" value="ВЫХОД">
+        </form>
+    </nav>
+</header>
+<body>
+<h1>Профиль пользователя: режим редактирования</h1>
+<hr>
+<div>
+    <form th:method="POST" th:action="@{/user/{id}(id=${userEdit.getId()})}" th:object="${userEdit}">
+        <div th:each="user : ${userEdit}">
+            <label for="username">Имя пользователя</label>
+            <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+            <input type="text" th:field="*{username}" placeholder="Введите имя пользователя" name="username" id="username" required/><br>
+
+            <label for="email">Электронная почта</label>
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+            <input type="text" th:field="*{email}" placeholder="Введите электронную почту" name="email" id="email" required/><br>
+
+            <label for="phone_number">Номер телефона</label>
+            <div th:if="${#fields.hasErrors('phone_number')}" th:errors="*{phone_number}"></div>
+            <input type="text" th:field="*{phone_number}" placeholder="Введите номер телефона" name="phone_number" id="phone_number" required/><br>
+            <div th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
+                <span>Текущая роль пользователя: </span>
+                <label>
+                    <select th:field="*{role}" name="role" id="role">
+                        <option disabled selected th:value="${user.getRole()}"></option>
+                        <option th:value="ROLE_ADMIN">Администратор</option>
+                        <option th:value="ROLE_USER">Пользователь</option>
+                    </select>
+                </label><br>
+            </div>
+            <div>
+                <label for="passwordHidden"></label>
+                <input type="hidden" th:field="*{password}" name="passwordHidden" id="passwordHidden" readonly/>
+            </div>
+
+            <div th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_USER')}">
+                <label for="password">Новый пароль: </label>
+                <input type="password" th:field="*{password}" name="password" id="password"/>
+            </div>
+
+        </div>
+        <div>
+            <input type="submit" value="Сохранить"/><br><br>
+            <a th:href="@{/users}">Отменить</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

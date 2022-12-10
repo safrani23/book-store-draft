@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Детали заказа</title>
+</head>
+<body>
+<h1>Дателизация заказа</h1>
+<hr>
+<div th:each="order : ${orderId}">
+    <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
+    <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
+    <p th:text="'Статус: ' + ${order.getStatus()}">
+    <hr>
+    <div>
+        <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="150px">
+        <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
+        <p th:text="'Количество: ' + ${order.getCount()}"></p>
+        <p th:text="'Цена: ' + ${order.getPrice()}"></p>
+    </div>
+    <form th:method="GET" th:action="@{/admin/order/{id}(id=${order.getId()})}">
+        <button>Редактировать</button>
+    </form>
+</div>
+</body>
+</html>

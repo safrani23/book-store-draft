@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
+    <title>Вход в систему</title>
+</head>
+<style>
+    body {
+        margin: 0;
+    }
+
+    header {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        background-color: #7658BF;
+        padding-left: 73px;
+        padding-right: 73px;
+        height: 70px;
+        align-content: center;
+    }
+
+    nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        justify-self: end;
+        align-self: center;
+        grid-gap: 30px;
+        max-width: min-content;
+    }
+
+    .nav_item {
+        text-decoration: none;
+        color: white;
+        font-family: "Segoe UI", sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .nav_item a {
+        text-decoration: none;
+        color: white;
+        font-family: "Segoe UI", sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .logo {
+        color: #ffff;
+        font-family: "Segoe UI", sans-serif;
+        font-size: 36px;
+        font-weight: bold;
+        cursor: pointer;
+        justify-self: start;
+    }
+
+    /* LOGIN */
+
+    body {
+        font-family: "Segoe UI", serif;
+    }
+
+    .login_container {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        width: 897px;
+        height: 588px;
+        box-shadow: 0 12px 24px 0 #d2d2d2;
+        border-radius: 10px;
+        margin: 60px auto;
+    }
+
+    .login_form {
+        display: grid;
+        grid-template-columns: 1fr;
+        background-color: #ffffff;
+        border: solid 1px #7658BF;
+        border-radius: 10px 0 0 10px;
+        padding: 0 80px;
+        align-content: center;
+    }
+
+    .welcome_header {
+        color: #7658BF;
+        font-size: 38px;
+        font-weight: bold;
+        text-align: center;
+        margin: auto;
+        padding-bottom: 20px;
+    }
+
+    .login_prompt_text {
+        color: #7765A1;
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .login_form_input {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .login_username {
+        background: url("https://cdn-icons-png.flaticon.com/512/8105/8105559.png") no-repeat;
+        background-size: 32px;
+        background-position: 15px;
+    }
+
+    .login_password {
+        background: url("https://cdn-icons-png.flaticon.com/512/8204/8204224.png") no-repeat;
+        background-size: 32px;
+        background-position: 15px;
+    }
+
+    input {
+        height: 25px;
+    }
+
+    .login_username, .login_password {
+        padding-left: 60px;
+        border-radius: 10px;
+        border: solid 1px #A08FC8;
+        height: 50px;
+        color: #7765A1;
+        font-size: 20px;
+        outline: none;
+        margin-bottom: 20px;
+        transition: box-shadow 0.1s ease-out;
+        z-index: 1;
+    }
+
+    .login_username:hover, .login_password:hover {
+        box-shadow: 0 0 5px #A08FC8;
+    }
+
+    .login_username:focus, .login_password:focus {
+        box-shadow: 0 0 5px #A08FC8;
+    }
+
+    input::placeholder {
+        color: #BAAED6;
+        font-size: 20px;
+    }
+
+    .auth_condition {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 20px;
+        color: #7765A1;
+        font-size: 16px;
+    }
+
+    .auth_remember {
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+    }
+
+    .auth_remember_label_flag {
+        display: block;
+        cursor: pointer;
+    }
+
+    .auth_remember_flag {
+        display: none;
+    }
+
+    .auth_remember_fake_flag {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        vertical-align: middle;
+        margin-top: -1px;
+        margin-right: 3px;
+        cursor: pointer;
+        background: url("https://cdn-icons-png.flaticon.com/512/8206/8206394.png") no-repeat;
+        background-size: 25px;
+    }
+
+    .auth_remember_flag:checked + .auth_remember_fake_flag {
+        background: url("https://cdn-icons-png.flaticon.com/512/8206/8206400.png") no-repeat;
+        background-size: 25px;
+    }
+
+    .auth_password_recovery_link {
+        justify-self: end;
+        text-decoration: underline #7765A1;
+    }
+
+    a {
+        text-decoration: underline #7765A1;
+    }
+
+    a:hover {
+        color: #7300ff;
+    }
+
+    a:active {
+        color: #aa00ff;
+    }
+
+    a:after {
+        color: #7765A1;
+    }
+
+    .enter_btn {
+        font-size: 22px;
+        font-weight: bold;
+        color: #ffffff;
+        background-color: #7658BF;
+        border-radius: 10px;
+        border: none;
+        height: 60px;
+        cursor: pointer;
+        transition: box-shadow 0.1s ease-out;
+    }
+
+    .enter_btn:hover {
+        box-shadow: 0 0 5px #A08FC8;
+    }
+
+    .enter_btn:active {
+        box-shadow: none;
+    }
+
+
+    .direct_to_sign_up {
+        display: grid;
+        grid-template-columns: 1fr;
+        background-color: #7658BF;
+        border: solid 1px #7658BF;
+        border-radius: 0 10px 10px 0;
+        align-content: center;
+        padding: 0 50px;
+    }
+
+    .header_prompt_for_start {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin: auto;
+        padding-bottom: 25px;
+    }
+
+    .text_prompt_for_start {
+        color: #ffffff;
+        font-size: 16px;
+        text-align: center;
+        padding-bottom: 25px;
+    }
+
+    .signup_btn {
+        font-size: 18px;
+        font-weight: bold;
+        color: #ffffff;
+        border-radius: 10px;
+        border: solid 1px #ffffff;
+        background-color: #7658BF;
+        height: 60px;
+        cursor: pointer;
+        transition: box-shadow 0.1s ease-out;
+    }
+
+    .signup_btn:hover {
+        box-shadow: 0 0 5px #ffffff;
+    }
+
+    .signup_btn:focus {
+        box-shadow: none;
+    }
+
+    .error_message {
+        font-size: 14px;
+        color: rgba(255, 0, 47, 0.98);
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>
+<body>
+<div class="login_container">
+    <div class="login_form">
+        <h1 class="welcome_header">Добро пожаловать!</h1>
+        <span class="login_prompt_text">В качестве логина используйте имя пользователя, указанное при регистрации</span>
+        <form method="POST" th:action="@{/login}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <div class="login_form_input">
+                <label for="username"></label>
+                <input class="login_username" type="text" placeholder="Введите логин" name="username" id="username"/>
+                <label for="password"></label>
+                <input class="login_password" type="password" placeholder="Введите пароль" name="password"
+                       id="password"/>
+            </div>
+            <input class="enter_btn" type="submit" value="Вход"/>
+            <div class="error_message" th:if="${param.error}">Неверные учетные данные пользователя</div>
+        </form>
+    </div>
+    <div class="direct_to_sign_up">
+        <h2 class="header_prompt_for_start">Впервые здесь?</h2>
+        <span class="text_prompt_for_start">Для создания учетной записи воспользуйтесь формой регистрации</span>
+        <form th:action="@{/registration}">
+            <button class="signup_btn">Регистрация</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

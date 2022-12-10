@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="../../static/css/index.css" th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
+    <title>Поиск</title>
+</head>
+<header>
+    <form th:method="GET" th:action="@{/index}">
+        <input class="logo" type="submit" value="Book Store">
+    </form>
+    <nav>
+        <form th:method="GET" th:action="@{/search-all}">
+            <input class="navigation selected" type="submit" value="ПОИСК">
+        </form>
+        <form th:method="GET" th:action="@{/catalog-list}">
+            <input class="navigation" type="submit" value="КАТАЛОГ">
+        </form>
+        <form th:method="GET" th:action="@{/login}">
+            <input class="navigation" type="submit" value="ВХОД">
+        </form>
+        <form th:method="GET" th:action="@{/registration}">
+            <input class="navigation" type="submit" value="РЕГИСТРАЦИЯ">
+        </form>
+    </nav>
+</header>
+<body>
+<h1>Поиск и сортировка товаров по каталогу</h1>
+<hr>
+<form th:method="POST" th:action="@{/search-all}">
+    <fieldset>
+        <legend>Выберите критерий поиска: </legend>
+        <br>
+        <label for="title">Наименование</label>
+        <input type="text" name="title" id="title" th:value="*{value_title}"><br><br>
+
+        <label for="author">Автор</label>
+        <input name="author" id="author" th:value="*{value_author}"><br><br>
+
+        <span>Цена в руб. </span>
+        <label for="price_from">от </label>
+        <input type="text" name="price_from" id="price_from" th:value="*{value_price_from}">
+
+        <label for="price_to"> до </label>
+        <input type="text" name="price_to" id="price_to" th:value="*{value_price_to}"><br><br>
+
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend>Выберите критерий сортировки: </legend>
+        <div>
+            <p>Жанр:</p>
+            <label for="belletristic">Художественная литература</label>
+            <input type="radio" id="belletristic" name="genre" value="belletristic"><br>
+            <label for="business">Деловая литература</label>
+            <input type="radio" id="business" name="genre" value="business"><br>
+            <label for="psychology">Психология</label>
+            <input type="radio" id="psychology" name="genre" value="psychology"><br>
+            <label for="philosophy_and_religion">Философия и религия</label>
+            <input type="radio" id="philosophy_and_religion" name="genre" value="philosophy_and_religion">
+            <br>
+            <br>
+        </div>
+
+        <label for="price_asc">Сортировать по возрастанию цены </label>
+        <input type="radio" id="price_asc" name="price" value="sort_by_asc_price"><br>
+
+        <label for="price_desc">Сортировать по убыванию цены</label>
+        <input type="radio" id="price_desc" name="price" value="sort_by_desc_price"><br><br>
+    </fieldset><br>
+    <input type="submit" value="Найти">
+    <br>
+</form>
+<h3>Результат запроса</h3>
+<hr>
+<div th:each="product : ${search_product}">
+    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" height="200px">
+    <br>
+    <a th:href="@{/catalog/item/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+    <hr>
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="../../static/css/index.css" th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
+    <title>Профиль</title>
+</head>
+<header>
+    <form th:method="GET" th:action="@{/index}">
+        <input class="logo" type="submit" value="Book Store">
+    </form>
+    <nav>
+        <form th:method="GET" th:action="@{/search}">
+            <input class="navigation" type="submit" value="ПОИСК">
+        </form>
+        <form th:method="GET" th:action="@{/catalog}">
+            <input class="navigation" type="submit" value="КАТАЛОГ">
+        </form>
+        <form th:method="GET" th:action="@{/basket}">
+            <input class="navigation" type="submit" value="КОРЗИНА">
+        </form>
+        <form th:method="GET" th:action="@{/orders}">
+            <input class="navigation" type="submit" value="ЗАКАЗЫ">
+        </form>
+        <form th:method="GET" th:action="@{/profile}">
+            <input class="navigation selected" type="submit" value="ПРОФИЛЬ">
+        </form>
+        <form th:method="POST" th:action="@{/logout}">
+            <input class="navigation" type="submit" value="ВЫХОД">
+        </form>
+    </nav>
+</header>
+<body>
+<div th:each="user : ${userProfile}">
+  <div>
+    <p th:text="'Имя пользователя: ' + ${user.getUsername()}"></p><br>
+    <p th:text="'Электронная почта: ' + ${user.getEmail()}"></p><br>
+    <p th:text="'Телефон: ' + ${user.getPhone_number()}"></p><br>
+  </div>
+  <hr>
+</div>
+</body>
+</html>

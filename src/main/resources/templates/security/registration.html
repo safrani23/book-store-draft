@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
+    <title>Регистрация</title>
+</head>
+<style>
+    body{
+        font-family: "Segoe UI", serif;
+    }
+
+    .auth_container{
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        width: 897px;
+        height: 588px;
+        box-shadow: 0 12px 24px 0 #d2d2d2;
+        border-radius: 10px;
+        margin: 60px auto;
+    }
+
+    .registration_form{
+        display: grid;
+        grid-template-columns: 1fr;
+        background-color: #ffffff;
+        border: solid 1px #7658BF;
+        border-radius: 0 10px 10px 0;
+        padding: 0 80px;
+        align-content: center;
+    }
+
+    .registration_welcome{
+        color: #7658BF;
+        font-size: 38px;
+        font-weight: bold;
+        text-align: center;
+        margin: auto;
+        padding-bottom: 15px;
+    }
+
+    .prompting_message_for_the_registration_form{
+        color: #7765A1;
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    form{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .registration_data_input{
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-bottom: 25px;
+    }
+
+    .username{
+        background: url("https://cdn-icons-png.flaticon.com/512/8105/8105559.png") no-repeat;
+        background-size: 32px;
+        background-position: 15px;
+    }
+
+    .email{
+        background: url("https://cdn-icons-png.flaticon.com/512/8084/8084091.png") no-repeat;
+        background-size: 32px;
+        background-position: 15px;
+    }
+
+    .phone_number{
+        background: url("https://cdn-icons-png.flaticon.com/512/7838/7838416.png") no-repeat;
+        background-size: 32px;
+        background-position: 15px;
+    }
+
+    .password{
+        background: url("https://cdn-icons-png.flaticon.com/512/8204/8204224.png") no-repeat;
+        background-size: 32px;
+        background-position: 15px;
+    }
+
+    input {
+        height: 25px;
+    }
+
+    .username, .email, .phone_number, .password{
+        padding-left: 60px;
+        border-radius: 10px;
+        border: solid 1px #A08FC8;
+        height: 42px;
+        color: #7765A1;
+        font-size: 20px;
+        outline: none;
+        margin-bottom: 5px;
+        transition: box-shadow 0.1s ease-out;
+        z-index: 1;
+    }
+
+    .username:hover, .email:hover, .phone_number:hover, .password:hover{
+        box-shadow: 0 0 5px #A08FC8;
+    }
+
+    .username:focus, .email:focus, .phone_number:focus, .password:focus{
+        box-shadow: 0 0 5px #A08FC8;
+    }
+
+    input::placeholder {
+        color: #BAAED6;
+        font-size: 20px;
+    }
+
+    .agreements_section{
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        color: #7765A1;
+        font-size: 16px;
+    }
+
+    .consent_for_registration{
+        display: grid;
+        grid-template-columns: 1fr 9fr;
+    }
+
+    .label_for_consent_flag{
+        display: block;
+        cursor: pointer;
+    }
+
+    .consent_flag{
+        display: none;
+    }
+
+    .consent_fake_flag{
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        vertical-align: middle;
+        margin-top: -1px;
+        margin-right: 3px;
+        cursor: pointer;
+        background: url("https://cdn-icons-png.flaticon.com/512/8206/8206394.png") no-repeat;
+        background-size: 25px;
+    }
+
+    .consent_flag:checked + .consent_fake_flag {
+        background: url("https://cdn-icons-png.flaticon.com/512/8206/8206400.png") no-repeat;
+        background-size: 25px;
+    }
+
+    .registration_button{
+        font-size: 22px;
+        font-weight: bold;
+        color: #ffffff;
+        background-color: #7658BF;
+        border-radius: 10px;
+        border: none;
+        height: 55px;
+        cursor: pointer;
+        transition: box-shadow 0.1s ease-out;
+    }
+
+    .registration_button:hover{
+        box-shadow: 0 0 5px #A08FC8;
+    }
+
+    .registration_button:active{
+        box-shadow: none;
+    }
+
+
+    .direct_to_sign_in{
+        display: grid;
+        grid-template-columns: 1fr;
+        background-color: #7658BF;
+        border: solid 1px #7658BF;
+        border-radius: 10px 0 0 10px;
+        align-content: center;
+        padding: 0 50px;
+    }
+
+    .header_for_repeat_visitors{
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin: auto;
+        padding-bottom: 20px;
+    }
+
+    .prompting_message_for_repeat_visitors{
+        color: #ffffff;
+        font-size: 16px;
+        text-align: center;
+        padding-bottom: 25px;
+    }
+
+    .login_button{
+        font-size: 18px;
+        font-weight: bold;
+        color: #ffffff;
+        border-radius: 10px;
+        border: solid 1px #ffffff;
+        background-color: #7658BF;
+        height: 60px;
+        cursor: pointer;
+        transition: box-shadow 0.1s ease-out;
+    }
+
+    .login_button:hover{
+        box-shadow: 0 0 5px #ffffff;
+    }
+
+    .login_button:active{
+        box-shadow: none;
+    }
+
+    .error_message{
+        font-size: 12px;
+        color: rgba(255, 0, 47, 0.98);
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+</style>
+<body>
+<div class="auth_container">
+    <div class="direct_to_sign_in">
+        <h2 class="header_for_repeat_visitors">Уже были у нас?</h2>
+        <span class="prompting_message_for_repeat_visitors">Для перехода в личный кабинет воспользуйтесь формой авторизации</span>
+        <form th:action="@{/auth}">
+            <button class="login_button">Авторизация</button>
+        </form>
+    </div>
+    <div class="registration_form">
+        <h1 class="registration_welcome">Добро пожаловать!</h1>
+        <span class="prompting_message_for_the_registration_form">Заполните форму регистрации</span>
+        <form th:method="POST" th:action="@{/registration}" th:object="${user}">
+            <div class="registration_data_input">
+                <label for="username"></label>
+                <input class="username" type="text" th:field="*{username}" placeholder="Введите имя" name="username" id="username" required/>
+                <div class="error_message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+
+                <label for="email"></label>
+                <input class="email" type="text" th:field="*{email}" placeholder="Введите электронную почту" name="email" id="email" required/>
+                <div class="error_message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
+                <label for="phone_number"></label>
+                <input class="phone_number" type="text" th:field="*{phone_number}" placeholder="Введите номер телефона" name="phone_number" id="phone_number" required/>
+                <div class="error_message" th:if="${#fields.hasErrors('phone_number')}" th:errors="*{phone_number}"></div>
+
+                <label for="password"></label>
+                <input class="password" type="password" th:field="*{password}" placeholder="Введите пароль" name="password" id="password" required/>
+                <div class="error_message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            </div>
+            <input class="registration_button" type="submit" value="Регистрация"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

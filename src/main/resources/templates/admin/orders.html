@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="../../static/css/index.css" th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
+    <title>Список заказов</title>
+</head>
+<header>
+    <form th:method="GET" th:action="@{/index}">
+        <input class="logo" type="submit" value="Book Store">
+    </form>
+    <nav>
+        <form th:method="GET" th:action="@{/search}">
+            <input class="navigation" type="submit" value="ПОИСК">
+        </form>
+        <form th:method="GET" th:action="@{/catalog}">
+            <input class="navigation" type="submit" value="КАТАЛОГ">
+        </form>
+        <form th:method="GET" th:action="@{/admin/orders}">
+            <input class="navigation selected" type="submit" value="ЗАКАЗЫ">
+        </form>
+        <form th:method="GET" th:action="@{/users}">
+            <input class="navigation" type="submit" value="ПОЛЬЗОВАТЕЛИ">
+        </form>
+        <form th:method="POST" th:action="@{/logout}">
+            <input class="navigation" type="submit" value="ВЫХОД">
+        </form>
+    </nav>
+</header>
+<body>
+<h1>Заказы</h1>
+<hr>
+<!--
+<form th:method="POST" th:action="@{/admin/order-list}">
+    <fieldset>
+        <legend>Поиск заказа</legend>
+        <br>
+        <label for="number">Номер заказа</label>
+        <input type="text" name="number" id="number" th:value="*{value_number}"><br><br>
+        <input th:type="submit" th:value="Найти">
+
+    </fieldset><br>
+</form>
+
+<h3>Результат поиска</h3>
+<hr><br>th:method="GET" th:action="@{/admin/order/{id}(id=${selected.getId()})}
+-->
+<div th:each="selected : ${ordersList}">
+    <div>
+        <h3 th:text="'Заказ № ' + ${selected.getNumber()}"></h3>
+        <!--<p th:text="'Дата заказа: ' + ${#temporals.format(selected.getDateTime(), 'dd-MMM-yyyy')}"></p>-->
+        <p th:text="'Статус: ' + ${selected.getStatus()}">
+    </div>
+    <form>
+        <button>Редактировать</button>
+    </form>
+    <hr>
+</div>
+</body>
+</html>

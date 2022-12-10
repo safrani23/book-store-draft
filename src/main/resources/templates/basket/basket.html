@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="../../static/css/index.css" th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
+    <title>Корзина</title>
+</head>
+<header>
+    <form th:method="GET" th:action="@{/index}">
+        <input class="logo" type="submit" value="Book Store">
+    </form>
+    <nav>
+        <form th:method="GET" th:action="@{/search}">
+            <input class="navigation" type="submit" value="ПОИСК">
+        </form>
+        <form th:method="GET" th:action="@{/catalog}">
+            <input class="navigation" type="submit" value="КАТАЛОГ">
+        </form>
+        <form th:method="GET" th:action="@{/basket}">
+            <input class="navigation selected" type="submit" value="КОРЗИНА">
+        </form>
+        <form th:method="GET" th:action="@{/orders}">
+            <input class="navigation" type="submit" value="ЗАКАЗЫ">
+        </form>
+        <form th:method="GET" th:action="@{/profile}">
+            <input class="navigation" type="submit" value="ПРОФИЛЬ">
+        </form>
+        <form th:method="POST" th:action="@{/logout}">
+            <input class="navigation" type="submit" value="ВЫХОД">
+        </form>
+    </nav>
+</header>
+<body>
+<h1>Корзина</h1>
+<hr>
+<div th:each="product : ${basket_product}">
+    <div th:each="img : ${product.getImageList()}">
+        <img th:src="'/img/' + ${img.getFileName()}" height="280px" alt="product_img">
+    </div>
+    <a th:text="${product.getTitle()}" th:href="@{/catalog/item/{id}(id=${product.getId()})}"></a><br>
+    <p th:text="${product.getAuthor()}"></p><br>
+    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+    <form th:method="GET" th:action="@{/basket/{id}/delete(id=${product.getId()})}">
+        <button>Удалить</button>
+    </form>
+    <hr>
+</div>
+<form th:method="GET" th:action="@{/order/create}">
+    <button>Оформить заказ</button>
+</form>
+</body>
+</html>

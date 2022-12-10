@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/css/index.css" th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
+    <title>Главная</title>
+</head>
+<header>
+    <form>
+        <input class="logo" type="submit" value="Book Store">
+    </form>
+    <nav>
+        <form th:method="GET" th:action="@{/search-all}">
+            <input class="navigation" type="submit" value="ПОИСК">
+        </form>
+        <form th:method="GET" th:action="@{/catalog-list}">
+            <input class="navigation" type="submit" value="КАТАЛОГ">
+        </form>
+        <form th:method="GET" th:action="@{/registration}">
+            <input class="navigation" type="submit" value="РЕГИСТРАЦИЯ">
+        </form>
+        <form th:method="GET" th:action="@{/login}">
+            <input class="navigation" type="submit" value="ВХОД">
+        </form>
+    </nav>
+</header>
+<body>
+
+</body>
+<script src="../static/js/index.js" th:src="@{/js/index.js}"></script>
+</html>
