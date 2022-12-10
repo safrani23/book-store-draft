@@ -20,7 +20,7 @@
         <form th:method="GET" th:action="@{/basket}">
             <input class="navigation" type="submit" value="КОРЗИНА">
         </form>
-        <form th:method="GET" th:action="@{/orders}">
+        <form th:method="GET" th:action="@{/order/list}">
             <input class="navigation selected" type="submit" value="ЗАКАЗЫ">
         </form>
         <form th:method="GET" th:action="@{/profile}">
@@ -35,7 +35,7 @@
 <h1>Заказы</h1>
 <hr>
 <div th:each="header :${orders}">
-    <a th:text="'Заказ № ' + ${header.getNumber()}" th:href="@{/admin/order/{id}(id=${header.getId()})}"></a>
+    <a th:text="'Заказ № ' + ${header.getNumber()}" th:href="@{/order/{id}(id=${header.getId()})}"></a>
     <p th:text="'Дата заказа: ' + ${#temporals.format(header.getDateTime(), 'dd-MMM-yyyy')}"></p>
     <p th:text="'Статус: ' + ${header.getStatus().getTitle()}"></p>
     <hr><br>

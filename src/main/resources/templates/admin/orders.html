@@ -17,7 +17,7 @@
         <form th:method="GET" th:action="@{/catalog}">
             <input class="navigation" type="submit" value="КАТАЛОГ">
         </form>
-        <form th:method="GET" th:action="@{/admin/orders}">
+        <form th:method="GET" th:action="@{/orders}">
             <input class="navigation selected" type="submit" value="ЗАКАЗЫ">
         </form>
         <form th:method="GET" th:action="@{/users}">
@@ -32,7 +32,7 @@
 <h1>Заказы</h1>
 <hr>
 <br>
-<form th:method="GET" th:action="@{/admin/order/search}">
+<form th:method="GET" th:action="@{/order/search}">
     <fieldset>
         <legend>Поиск заказа</legend>
         <br>
@@ -45,7 +45,7 @@
 
 <div th:each="order : ${ordersList}">
     <div>
-        <a th:text="'Заказ № ' + ${order.getNumber()}" th:href="@{/admin/order/{id}(id=${order.getId()})}"></a>
+        <a th:text="'Заказ № ' + ${order.getNumber()}" th:href="@{/order/{id}(id=${order.getId()})}"></a>
         <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
         <p th:text="'Статус: ' + ${order.getStatus().getTitle()}">
     </div>
@@ -53,7 +53,7 @@
 </div>
 
 <div th:each="order : ${searchOrder}">
-    <a th:text="'Заказ № ' + ${order.getNumber()}" th:href="@{/admin/order/{id}(id=${order.getId()})}"></a>
+    <a th:text="'Заказ № ' + ${order.getNumber()}" th:href="@{/order/{id}(id=${order.getId()})}"></a>
     <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
     <p th:text="'Статус: ' + ${order.getStatus().getTitle()}">
     <hr>

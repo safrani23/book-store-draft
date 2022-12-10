@@ -22,7 +22,7 @@ header {
 
 nav {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     justify-self: end;
     align-self: center;
     grid-gap: 20px;
@@ -92,14 +92,6 @@ header {
     justify-content: end;
     padding-left: 30px;
     padding-right: 30px;
-}
-
-nav {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    justify-self: end;
-    align-self: center;
-    grid-gap: 20px;
 }
 
 .navigation {

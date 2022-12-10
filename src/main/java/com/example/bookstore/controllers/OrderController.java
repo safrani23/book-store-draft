@@ -30,7 +30,7 @@ public class OrderController {
         return "redirect:/orders";
     }
 
-    @GetMapping("/orders")
+    @GetMapping("/order/list")
     public String ordersUser(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();

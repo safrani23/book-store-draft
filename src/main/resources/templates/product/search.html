@@ -21,11 +21,11 @@
               th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_USER')}">
             <input class="navigation" type="submit" value="КОРЗИНА">
         </form>
-        <form th:method="GET" th:action="@{/orders}"
+        <form th:method="GET" th:action="@{/order/list}"
               th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_USER')}">
             <input class="navigation" type="submit" value="ЗАКАЗЫ">
         </form>
-        <form th:method="GET" th:action="@{/admin/orders}"
+        <form th:method="GET" th:action="@{/orders}"
               th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
             <input class="navigation" type="submit" value="ЗАКАЗЫ">
         </form>
