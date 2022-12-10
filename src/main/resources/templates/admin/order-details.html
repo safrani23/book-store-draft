@@ -41,7 +41,7 @@
 
     <p th:text="'Статус: ' + ${header.getStatus().getTitle()}"></p>
 
-    <form th:method="POST" th:action="@{/admin/order/{id}(id=${header.getId()})}" th:object="${orderEdit}">
+    <form th:method="POST" th:action="@{/admin/order/{id}(id=${header.getId()})}" th:object="${order}">
         <div th:each="change : ${order}">
 
             <input type="hidden" th:name="user" th:value="${change.getUser().getId()}">

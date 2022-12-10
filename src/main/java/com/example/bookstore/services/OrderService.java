@@ -67,7 +67,6 @@ public class OrderService {
     public void updateOrderStatus(int id, Order order){
         order.setId(id);
         order.setDateTime(LocalDateTime.now());
-        order.setStatus((order.getStatus()));
         orderRepository.save(order);
     }
 }
