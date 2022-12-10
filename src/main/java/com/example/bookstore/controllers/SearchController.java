@@ -1,8 +1,10 @@
 package com.example.bookstore.controllers;
 
+import com.example.bookstore.models.Product;
 import com.example.bookstore.repositories.ProductRepository;
 import com.example.bookstore.services.ProductService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,15 +30,41 @@ public class SearchController {
         model.addAttribute("search_product", productService.getProductList());
         return "product/search";
     }
+/*
+    Specification<Product> findBy(String title, String author){
+        return findByTitle(title).and(findByAuthor(author));
+    }
+
+    Specification<Product> findByTitle(String title){
+       return findByLike(title, "title");
+    }
+
+    Specification<Product> findByAuthor(String author){
+        return findByLike(author, "author");
+
+    }
+
+    Specification<Product> findByLike(String value, String fieldName){
+        return (root, query, criteriaBuilder) -> {
+
+            if(value == null || value.isEmpty()){
+                return null;
+            }
+            return criteriaBuilder.like(root.get(fieldName), "%" + value + "%");
+        };
+    }
+*/
+
 
     @PostMapping("/search")
     public String productSearch(
             @RequestParam(value = "title", required = false, defaultValue = "") String title,
-            @RequestParam(value = "author", required = false) String author,
+            @RequestParam(value = "author", required = false, defaultValue = "") String author,
             @RequestParam(value = "price_from", required = false) String price_from,
             @RequestParam(value = "price_to", required = false) String price_to,
             @RequestParam(value = "price", required = false) String price,
             @RequestParam(value = "genre", required = false) String genre, Model model) {
+        //List<Product> productsList = productRepository.findAll(findBy(title, author));
 
         if (!title.isEmpty()) {
             if (!price_from.isEmpty() && !price_to.isEmpty()) {
@@ -184,6 +212,10 @@ public class SearchController {
     return "product/search";
 
     }
+
+
+
+
 
     /* =========================== */
 

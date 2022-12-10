@@ -1,4 +1,4 @@
-package com.example.bookstore.classifiers;
+package com.example.bookstore.models;
 
 public enum Status {
 
@@ -12,11 +12,12 @@ public enum Status {
 
     private final String title;
 
-    Status(String title) {
+    private Status(String title) {
         this.title = title;
     }
 
     public String getTitle(){
         return title;
     }
+
 }

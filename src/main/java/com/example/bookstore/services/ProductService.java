@@ -48,4 +48,6 @@ public class ProductService {
     public void removeProduct(int id){
         productRepository.deleteById(id); // удалить продукт из репозитория
     }
+
+
 }

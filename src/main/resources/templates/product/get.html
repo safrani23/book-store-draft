@@ -12,7 +12,7 @@
         <h2 th:text="${product.getAuthor()}"></h2>
         <hr>
         <div th:each="img : ${product.getImageList()}" class="product_img_block">
-            <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" class="product_img">
+            <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" class="product_img" height="200px">
         </div>
         <div th:text="${product.getPublishing_house()}" class="product_publishing_house"></div><br>
         <div th:text="${product.getYear_of_publishing()}" class="product_year_of_publishing"></div><br>

@@ -2,11 +2,13 @@ package com.example.bookstore.repositories;
 
 import com.example.bookstore.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
+
     @Query(value = "select * from t_product where ((lower(title) LIKE CONCAT('%',?1,'%')) or (lower(title) LIKE CONCAT(?1,'%')) or (lower(title) LIKE CONCAT('%',?1)))", nativeQuery = true)
     List<Product> filterByProductTitleIgnoreCase(String title);
 

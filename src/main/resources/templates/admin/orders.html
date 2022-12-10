@@ -31,31 +31,33 @@
 <body>
 <h1>Заказы</h1>
 <hr>
-<!--
-<form th:method="POST" th:action="@{/admin/order-list}">
+<br>
+<form th:method="GET" th:action="@{/admin/order/search}">
     <fieldset>
         <legend>Поиск заказа</legend>
         <br>
         <label for="number">Номер заказа</label>
         <input type="text" name="number" id="number" th:value="*{value_number}"><br><br>
-        <input th:type="submit" th:value="Найти">
-
+        <button th:type="submit">Найти</button>
     </fieldset><br>
 </form>
 
-<h3>Результат поиска</h3>
-<hr><br>th:method="GET" th:action="@{/admin/order/{id}(id=${selected.getId()})}
--->
-<div th:each="selected : ${ordersList}">
+
+<div th:each="order : ${ordersList}">
     <div>
-        <h3 th:text="'Заказ № ' + ${selected.getNumber()}"></h3>
-        <!--<p th:text="'Дата заказа: ' + ${#temporals.format(selected.getDateTime(), 'dd-MMM-yyyy')}"></p>-->
-        <p th:text="'Статус: ' + ${selected.getStatus()}">
+        <a th:text="'Заказ № ' + ${order.getNumber()}" th:href="@{/admin/order/{id}(id=${order.getId()})}"></a>
+        <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
+        <p th:text="'Статус: ' + ${order.getStatus().getTitle()}">
     </div>
-    <form>
-        <button>Редактировать</button>
-    </form>
     <hr>
 </div>
+
+<div th:each="order : ${searchOrder}">
+    <a th:text="'Заказ № ' + ${order.getNumber()}" th:href="@{/admin/order/{id}(id=${order.getId()})}"></a>
+    <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
+    <p th:text="'Статус: ' + ${order.getStatus().getTitle()}">
+    <hr>
+</div>
+
 </body>
 </html>

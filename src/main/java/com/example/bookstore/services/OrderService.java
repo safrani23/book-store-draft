@@ -1,10 +1,7 @@
 package com.example.bookstore.services;
 
-import com.example.bookstore.classifiers.Status;
-import com.example.bookstore.models.Basket;
-import com.example.bookstore.models.Order;
-import com.example.bookstore.models.OrderDetails;
-import com.example.bookstore.models.Product;
+import com.example.bookstore.models.Status;
+import com.example.bookstore.models.*;
 import com.example.bookstore.repositories.BasketRepository;
 import com.example.bookstore.repositories.OrderDetailRepository;
 import com.example.bookstore.repositories.OrderRepository;
@@ -15,8 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -29,19 +26,13 @@ public class OrderService {
 
     private final OrderDetailRepository orderDetailRepository;
 
+
     //@Autowired
     public OrderService(OrderRepository orderRepository, BasketRepository basketRepository, ProductService productService, OrderDetailRepository orderDetailRepository) {
         this.orderRepository = orderRepository;
         this.basketRepository = basketRepository;
         this.productService = productService;
         this.orderDetailRepository = orderDetailRepository;
-    }
-
-    @Transactional
-    public void updateOrderStatus(int id, Order order) {
-        order.setId(id);
-        order.setDateTime(LocalDateTime.now());
-        orderRepository.save(order); // обновить продукт в репозитории
     }
 
     @Transactional
@@ -67,4 +58,16 @@ public class OrderService {
         }
     }
 
+    public Order getOrderById(int id){
+        Optional<Order> order_db = orderRepository.findById(id);
+        return order_db.orElse(null);
+    }
+
+    @Transactional
+    public void updateOrderStatus(int id, Order order){
+        order.setId(id);
+        order.setDateTime(LocalDateTime.now());
+        order.setStatus((order.getStatus()));
+        orderRepository.save(order);
+    }
 }

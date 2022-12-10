@@ -44,5 +44,31 @@
     <hr>
 
 </div>
+
+<div th:each="header :${orders}">
+    <h2 th:text="'Заказ № ' + ${header.getNumber()}" th:href="@{/admin/order/{id}(id=${header.getId()})}"></h2>
+    <p th:text="'Дата заказа: ' + ${#temporals.format(header.getDateTime(), 'dd-MMM-yyyy')}"></p>
+    <p th:text="'Пользователь: ' + ${header.getUser().getUsername()}"></p>
+    <p th:text="'Email: ' + ${header.getUser().getEmail()}"></p>
+    <p th:text="'Телефон: ' + ${header.getUser().getPhone_number()}"></p>
+    <p th:text="'Статус: ' + ${header.getStatus().getTitle()}"></p>
+
+    <hr><br>
+</div>
+<div th:each="details : ${orderDetails}">
+    <div>
+        <div th:each="img : ${details.getProduct().getImageList()}">
+            <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" class="product_img" height="200px">
+        </div>
+        <p th:text="${details.getProduct().getCategory().getName()}"></p>
+        <h3 th:text="${details.getProduct().getTitle()}"></h3>
+        <h4 th:text="${details.getProduct().getAuthor()}"></h4>
+        <p th:text="${details.getProduct().getPublishing_house()}"></p>
+        <p th:text="${details.getProduct().getYear_of_publishing()}"></p>
+        <p th:text="${details.getCount()}"></p>
+        <p th:text="${details.getPrice()}"></p>
+        <hr>
+    </div>
+</div>
 </body>
 </html>

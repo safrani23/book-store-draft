@@ -1,7 +1,5 @@
 package com.example.bookstore.models;
 
-import com.example.bookstore.classifiers.Status;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -27,6 +25,12 @@ public class Order {
     public Order(String number, User user, Status status) {
         this.number = number;
         this.user = user;
+        this.status = status;
+    }
+
+    public Order(int id, LocalDateTime dateTime, Status status) {
+        this.id = id;
+        this.dateTime = dateTime;
         this.status = status;
     }
 

@@ -2,12 +2,15 @@ package com.example.bookstore.controllers;
 
 import com.example.bookstore.models.Order;
 import com.example.bookstore.models.User;
+import com.example.bookstore.repositories.OrderDetailRepository;
 import com.example.bookstore.repositories.OrderRepository;
 import com.example.bookstore.services.OrderService;
 import com.example.bookstore.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class AdminController {
@@ -16,11 +19,18 @@ public class AdminController {
 
     private final OrderRepository orderRepository;
 
+    private final OrderDetailRepository orderDetailRepository;
+
     private final OrderService orderService;
 
-    public AdminController(UserService userService, OrderRepository orderRepository, OrderService orderService) {
+    public AdminController(
+            UserService userService,
+            OrderRepository orderRepository,
+            OrderDetailRepository orderDetailRepository,
+            OrderService orderService) {
         this.userService = userService;
         this.orderRepository = orderRepository;
+        this.orderDetailRepository = orderDetailRepository;
         this.orderService = orderService;
     }
 
@@ -49,43 +59,30 @@ public class AdminController {
         model.addAttribute("ordersList", orderRepository.findAll());
         return "admin/orders";
     }
-/*
-    @PostMapping("/admin/orders")
-    public String ordersList(
-            @RequestParam(value = "number", required = false) String number, Model model) {
-        if (!number.isEmpty()){
-            System.out.println("Поиск заказа");
-            List<Order> orderList = orderRepository.findOrderByNumber();
-            System.out.println(orderList);
-            model.addAttribute("ordersList", orderList);
-            model.addAttribute("value_number", number);
-            return "admin/orders";
-        }
-        List<Order> orderList = orderRepository.findOrderByNumber();
-        System.out.println(orderList);
-        model.addAttribute("ordersList", orderList);
-        return "admin/orders";
-    }
-*/
-/*
-    @PostMapping("/admin/orders")
-    public String ordersList(Model model){
-        List<Order> orderList = orderRepository.findOrderByNumber();
-        model.addAttribute("ordersList", orderList);
-        return "admin/orders";
-    }
-*/
+
     @GetMapping("/admin/order/{id}")
     public String orderStatus(@PathVariable("id") int id, Model model){
-        model.addAttribute("orderId", userService.getUserById(id));
+        model.addAttribute("order", orderService.getOrderById(id));
+        model.addAttribute("orderDetails", orderDetailRepository.getReferenceById(id));
         return "admin/order-details";
     }
 
     @PostMapping("/admin/order/{id}")
     public String orderStatus(
-            @ModelAttribute("orderId") Order order,
+            @ModelAttribute("orderEdit") Order order,
             @PathVariable("id") int id){
         orderService.updateOrderStatus(id, order);
         return "redirect:/order-details";
     }
+
+    @GetMapping("/admin/order/search")
+    public String orderStatus(
+            @RequestParam(value = "number", required = false, defaultValue = "") String number, Model model){
+        List<Order> orderList = orderRepository.findByOrderNumber(number);
+        model.addAttribute("searchOrder", orderList);
+        model.addAttribute("value_number", number);
+        return "admin/orders";
+    }
+
+
 }

@@ -1,26 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Детали заказа</title>
+    <link href="../../static/css/index.css" th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
+    <title>Заказ</title>
 </head>
-<body>
-<h1>Дателизация заказа</h1>
-<hr>
-<div th:each="order : ${orderId}">
-    <h3 th:text="'Заказ № ' + ${order.getNumber()}"></h3>
-    <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
-    <p th:text="'Статус: ' + ${order.getStatus()}">
-    <hr>
-    <div>
-        <img th:src="'/img/' + ${order.getProduct().imageList[0].getFileName()}" width="150px">
-        <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}"></p>
-        <p th:text="'Количество: ' + ${order.getCount()}"></p>
-        <p th:text="'Цена: ' + ${order.getPrice()}"></p>
-    </div>
-    <form th:method="GET" th:action="@{/admin/order/{id}(id=${order.getId()})}">
-        <button>Редактировать</button>
+<header>
+    <form th:method="GET" th:action="@{/index}">
+        <input class="logo" type="submit" value="Book Store">
     </form>
+    <nav>
+        <form th:method="GET" th:action="@{/search}">
+            <input class="navigation" type="submit" value="ПОИСК">
+        </form>
+        <form th:method="GET" th:action="@{/catalog}">
+            <input class="navigation" type="submit" value="КАТАЛОГ">
+        </form>
+        <form th:method="GET" th:action="@{/admin/orders}">
+            <input class="navigation selected" type="submit" value="ЗАКАЗЫ">
+        </form>
+        <form th:method="GET" th:action="@{/users}">
+            <input class="navigation" type="submit" value="ПОЛЬЗОВАТЕЛИ">
+        </form>
+        <form th:method="POST" th:action="@{/logout}">
+            <input class="navigation" type="submit" value="ВЫХОД">
+        </form>
+    </nav>
+</header>
+<body>
+<h1>Детализация по заказу</h1>
+<hr>
+<div th:each="header :${order}">
+    <h2 th:text="'Заказ № ' + ${header.getNumber()}" th:href="@{/admin/order/{id}(id=${header.getId()})}"></h2>
+    <p th:text="'Дата заказа: ' + ${#temporals.format(header.getDateTime(), 'dd-MMM-yyyy')}"></p>
+
+    <p th:text="'Пользователь: ' + ${header.getUser().getUsername()}"></p>
+    <p th:text="'Email: ' + ${header.getUser().getEmail()}"></p>
+    <p th:text="'Телефон: ' + ${header.getUser().getPhone_number()}"></p>
+
+    <p th:text="'Статус: ' + ${header.getStatus().getTitle()}"></p>
+
+    <form th:method="POST" th:action="@{/admin/order/{id}(id=${header.getId()})}" th:object="${orderEdit}">
+        <div th:each="change : ${order}">
+
+            <input type="hidden" th:name="user" th:value="${change.getUser().getId()}">
+
+            <input type="hidden" th:name="date_time" th:value="${change.getDateTime()}">
+
+            <input type="hidden" th:name="number" th:value="${change.getNumber()}">
+
+            <label>Изменить статус:
+                <select>
+                    <option th:each="status : ${T(com.example.bookstore.models.Status).values()}"
+                            th:value="${status}" th:name="status" th:text="${status.title}"></option>
+                </select>
+            </label>
+            <input class="add_btn" type="submit" value="Сохранить"/>
+        </div>
+    </form>
+    <hr><br>
+</div>
+<div th:each="details : ${orderDetails}">
+    <div>
+        <div th:each="img : ${details.getProduct().getImageList()}">
+
+        </div>
+        <p th:text="${details.getProduct().getCategory().getName()}"></p>
+        <h3 th:text="${details.getProduct().getTitle()}"></h3>
+        <h4 th:text="${details.getProduct().getAuthor()}"></h4>
+        <p th:text="${details.getProduct().getPublishing_house()}"></p>
+        <p th:text="${details.getProduct().getYear_of_publishing()}"></p>
+        <p th:text="${details.getCount()}"></p>
+        <p th:text="${details.getPrice()}"></p>
+        <hr>
+    </div>
 </div>
 </body>
 </html>

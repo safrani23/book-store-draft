@@ -13,11 +13,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     List<Order> findByUser(User user);
 
-    @Query(value = "select * from t_orders where ((lower(number) LIKE '%?1%') or (lower(number) LIKE '?1%') or (lower(number) LIKE '%?1'))", nativeQuery = true)
-    List<Order> filterOrderByNumberIgnoreCase(String number);
-
-
-    @Query(value = "select distinct number, status from t_orders", nativeQuery = true)
-    List<Order> findOrderByNumber();
+    @Query(value = "select * from t_orders where ((lower(number) LIKE CONCAT('%',?1,'%')) or (lower(number) LIKE CONCAT(?1,'%')) or (lower(number) LIKE CONCAT('%',?1)))", nativeQuery = true)
+    List<Order> findByOrderNumber(String number);
 
 }

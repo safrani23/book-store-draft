@@ -4,25 +4,22 @@ import com.example.bookstore.models.Order;
 import com.example.bookstore.repositories.OrderRepository;
 import com.example.bookstore.security.UserDetails;
 import com.example.bookstore.services.OrderService;
-import com.example.bookstore.services.ProductService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
 import java.util.List;
 
 @Controller
 public class OrderController {
 
-    private final ProductService productService;
     private final OrderService orderService;
     private final OrderRepository orderRepository;
 
-    public OrderController(
-            ProductService productService, OrderService orderService, OrderRepository orderRepository) {
-        this.productService = productService;
+    public OrderController(OrderService orderService, OrderRepository orderRepository) {
         this.orderService = orderService;
         this.orderRepository = orderRepository;
     }
@@ -41,5 +38,4 @@ public class OrderController {
         model.addAttribute("orders", orderList);
         return "orders/list";
     }
-
 }
