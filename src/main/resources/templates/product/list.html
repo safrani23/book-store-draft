@@ -7,6 +7,27 @@
     <title>Поиск</title>
 </head>
 <style>
+    .add_btn{
+        font-size: 20px;
+        font-weight: bold;
+        color: #ffffff;
+        background-color: #7658BF;
+        border-radius: 10px;
+        border: none;
+        height: 40px;
+        cursor: pointer;
+        transition: box-shadow 0.1s ease-out;
+        padding: 5px 15px;
+    }
+
+    .add_btn:hover{
+        box-shadow: 0 0 5px #A08FC8;
+    }
+
+    .add_btn:active{
+        box-shadow: none;
+    }
+
     header {
         display: grid;
         grid-template-columns: 3fr 2fr;
@@ -268,7 +289,7 @@
 <hr><br>
 <form th:action="@{/product/add}"
       th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
-    <button class='product_card_button'>Добавить</button>
+    <button class="add_btn">Добавить</button>
 </form>
 <br>
 
@@ -285,12 +306,12 @@
 
                 <form th:method="GET" th:action="@{/basket/{id}/add(id=${product.getId()})}"
                       th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_USER')}">
-                    <button class='product_card_button'>Купить</button>
+                    <button class="add_btn">Купить</button>
                 </form>
 
                 <div class='product_card_footer'
                       th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
-                    <form class='product_btn edit' th:method="GET" th:action="@{/product/{id}/edit(id=${product.getId()})}">
+                    <form class="add_btn" th:method="GET" th:action="@{/product/{id}/edit(id=${product.getId()})}">
                         <button class='product_card_button'>Редактировать</button>
                     </form>
 
