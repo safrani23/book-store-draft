@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="../../static/css/index.css" th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
     <title>Поиск</title>
@@ -26,6 +27,7 @@
     </nav>
 </header>
 <body>
+<br>
 <h1>Поиск и сортировка товаров по каталогу</h1>
 <hr>
 <form th:method="POST" th:action="@{/search-all}">
@@ -43,11 +45,9 @@
         <input class="input_space" type="text" name="price_to" id="price_to" th:value="*{value_price_to}"><br><br>
 
     </fieldset>
-    <br>
     <fieldset>
         <legend>Выберите критерий сортировки: </legend>
         <div>
-            <p>Жанр:</p>
             <label for="belletristic">Художественная литература</label>
             <input type="radio" id="belletristic" name="genre" value="belletristic"><br>
             <label for="business">Деловая литература</label>
@@ -56,27 +56,34 @@
             <input type="radio" id="psychology" name="genre" value="psychology"><br>
             <label for="philosophy_and_religion">Философия и религия</label>
             <input type="radio" id="philosophy_and_religion" name="genre" value="philosophy_and_religion">
-            <br>
-            <br>
         </div>
-
+        <hr>
         <label for="price_asc">Сортировать по возрастанию цены </label>
         <input type="radio" id="price_asc" name="price" value="sort_by_asc_price"><br>
 
         <label for="price_desc">Сортировать по убыванию цены</label>
         <input type="radio" id="price_desc" name="price" value="sort_by_desc_price"><br><br>
-    </fieldset><br>
+    </fieldset>
     <input class="add_btn" type="submit" value="Найти">
-    <br>
+    <br><br>
 </form>
 <h3>Результат запроса</h3>
 <hr>
-<div th:each="product : ${search_product}">
-    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" height="200px">
-    <br>
-    <a th:href="@{/catalog/item/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
-    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-    <hr>
+<div class="container">
+    <div class="row">
+        <div class="card" style="width: 20rem;" th:each="product : ${search_product}">
+                <div class="card-body">
+                <img th:src="'/img/' + ${product.imageList[0].getFileName()}" height="200px">
+                <br>
+                <a th:href="@{/catalog/item/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+                <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+            </div>
+        </div>
+    </div>
 </div>
+<br>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </html>
