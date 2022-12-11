@@ -1,6 +1,6 @@
-# Аттестационная работа по программе: "Fullstack-разработка на языке Java"
+## Аттестационная работа по программе: "Fullstack-разработка на языке Java"
 
-## Итоговый проект на тему: Интернет-магазин книг "Book Store"
+# Итоговый проект на тему: Интернет-магазин книг "Book Store"
 
 ### PostgreSQL 14 script для Database: bookstore
 * Скрипт для приложения: [db.zip](https://github.com/safrani23/book-store-draft/files/10202271/db.zip)
