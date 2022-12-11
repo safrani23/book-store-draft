@@ -56,8 +56,6 @@
     <p th:text="'Телефон: ' + ${header.getUser().getPhone_number()}"
        th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}"></p>
 
-    <p th:text="'Статус: ' + ${header.getStatus().getTitle()}"></p>
-
     <form th:method="POST" th:action="@{/order/{id}(id=${header.getId()})}" th:object="${order}"
           th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
         <div th:each="change : ${order}">
@@ -73,7 +71,7 @@
                     <option th:each="status : ${T(com.example.bookstore.models.Status).values()}"
                             th:value="${status}" th:name="status" th:text="${status.getTitle()}" th:id="${status}"></option>
                 </select>
-
+            <br><br>
             <input class="add_btn" type="submit" value="Сохранить"/>
         </div>
     </form>

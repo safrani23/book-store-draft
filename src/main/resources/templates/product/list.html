@@ -2,12 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
     <title>Каталог</title>
 </head>
 <style>
-    .add_btn{
+    .add_btn {
         font-size: 20px;
         font-weight: bold;
         color: #ffffff;
@@ -20,11 +21,11 @@
         padding: 5px 15px;
     }
 
-    .add_btn:hover{
+    .add_btn:hover {
         box-shadow: 0 0 5px #A08FC8;
     }
 
-    .add_btn:active{
+    .add_btn:active {
         box-shadow: none;
     }
 
@@ -71,7 +72,7 @@
         box-shadow: 0 0 5px #B9A9FDFF;
     }
 
-    .navigation:focus{
+    .navigation:focus {
         border-radius: 10px;
         border: solid 1px #ffffff;
         box-shadow: none;
@@ -92,12 +93,12 @@
 
     /* ------ */
 
-    body{
+    body {
         max-width: 1150px;
         margin: 0 auto;
     }
 
-    h1{
+    h1 {
         font-family: "Segoe UI", sans-serif;
         font-size: 28px;
         color: #7658BF;
@@ -285,51 +286,65 @@
     </nav>
 </header>
 <body>
+<br>
 <h1>Каталог книг</h1>
-<hr><br>
+<hr>
+<br>
 <form th:action="@{/product/add}"
       th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
     <button class='product_card_button'>Добавить</button>
 </form>
 <br>
-    <div class="container">
-        <div class="row">
-            <div class="card" style="width: 20rem;" th:each="product : ${productList}">
-                <div class="card-body">
-                    <div th:each="img : ${product.getImageList()}" class="product_img_block">
-                        <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" class="product_img">
-                    </div>
-                    <div class='product_card_info'>
-                        <a th:text="${product.getTitle()}" th:href="@{/catalog/item/{id}(id=${product.getId()})}" class="product_title"></a>
-                        <div th:text="${product.getAuthor()}" class="product_author"></div>
-                        <div class="land_view_wrapper">
-                            <div class="product_price"><span th:text="${product.getPrice()} + ' ₽'" class="product_price_value"></span></div>
+<div class="container">
+    <div class="row">
+        <div class="card" style="width: 20rem;" th:each="product : ${productList}">
+            <div class="card-body">
+                <div th:each="img : ${product.getImageList()}" class="product_img_block">
+                    <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" class="product_img">
+                </div>
+                <div class='product_card_info'>
+                    <a th:text="${product.getTitle()}" th:href="@{/catalog/item/{id}(id=${product.getId()})}"
+                       class="product_title"></a>
+                    <div th:text="${product.getAuthor()}" class="product_author"></div>
+                    <div class="land_view_wrapper">
+                        <div class="product_price"><span th:text="${product.getPrice()} + ' ₽'"
+                                                         class="product_price_value"></span></div>
 
-                            <form th:method="GET" th:action="@{/basket/{id}/add(id=${product.getId()})}"
-                                  th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_USER')}">
-                                <button class='product_card_button'>Купить</button>
+                        <form th:method="GET" th:action="@{/basket/{id}/add(id=${product.getId()})}"
+                              th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_USER')}">
+                            <button class='product_card_button'>Купить</button>
+                        </form>
+
+                        <div class='product_card_footer'
+                             th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
+                            <form class='product_btn edit' th:method="GET"
+                                  th:action="@{/product/{id}/edit(id=${product.getId()})}">
+                                <button class='product_card_button'>Редактировать</button>
                             </form>
 
-                            <div class='product_card_footer'
-                                 th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
-                                <form class='product_btn edit' th:method="GET" th:action="@{/product/{id}/edit(id=${product.getId()})}">
-                                    <button class='product_card_button'>Редактировать</button>
-                                </form>
-
-                                <form class='product_btn delete' th:method="GET" th:action="@{/product/{id}/delete(id=${product.getId()})}">
-                                    <button class='product_btn delete'>
-                                        <img class="icon_for_button" src="https://cdn-icons-png.flaticon.com/512/8206/8206377.png" alt="delete" title="Удалить"/>
-                                    </button>
-                                </form>
-                            </div>
+                            <form class='product_btn delete' th:method="GET"
+                                  th:action="@{/product/{id}/delete(id=${product.getId()})}">
+                                <button class='product_btn delete'>
+                                    <img class="icon_for_button"
+                                         src="https://cdn-icons-png.flaticon.com/512/8206/8206377.png" alt="delete"
+                                         title="Удалить"/>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </html>
