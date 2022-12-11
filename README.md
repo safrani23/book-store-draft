@@ -10,4 +10,5 @@
 * [Итоговый проект - Book Store.pptx](https://github.com/safrani23/book-store-draft/files/10202554/-.Book.Store.pptx)
 
 ### Демонстрация программы
-* [bookstore.pdf](https://github.com/safrani23/book-store-draft/files/10202559/bookstore.pdf)<br>
+* https://youtu.be/ZOMVqxqn1Do - Демо Интернет-магазина Book Store (аноним и зарег. пользователь)
+* https://youtu.be/8rXg68WmIAY - Демо Интернет-магазина Book Store (администратор)
