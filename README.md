@@ -13,7 +13,7 @@
 
 * https://youtu.be/ZOMVqxqn1Do - видеозапись 1: 'Демо Интернет-магазина Book Store (аноним и зарег. пользователь)'
 * https://youtu.be/8rXg68WmIAY - видеозапись 2: 'Демо Интернет-магазина Book Store (администратор)'
-* [demo_bookstore_app.pdf](https://github.com/safrani23/book-store-draft/files/10202993/demo_bookstore_app.pdf) - sreenshots для демонстрации проекта
+* [demo_bookstore_app.pdf](https://github.com/safrani23/book-store-draft/files/10202993/demo_bookstore_app.pdf) - снимки экрана
 
 #### Тестовые данные
 * [src.zip](https://github.com/safrani23/book-store-draft/files/10202903/src.zip) - ресурсы (товары)
