@@ -17,11 +17,25 @@
         <form th:method="GET" th:action="@{/catalog}">
             <input class="navigation" type="submit" value="КАТАЛОГ">
         </form>
-        <form th:method="GET" th:action="@{/admin/orders}">
+        <form th:method="GET" th:action="@{/orders}"
+              th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
             <input class="navigation selected" type="submit" value="ЗАКАЗЫ">
         </form>
-        <form th:method="GET" th:action="@{/users}">
+        <form th:method="GET" th:action="@{/users}"
+              th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
             <input class="navigation" type="submit" value="ПОЛЬЗОВАТЕЛИ">
+        </form>
+        <form th:method="GET" th:action="@{/basket}"
+              th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_USER')}">
+            <input class="navigation" type="submit" value="КОРЗИНА">
+        </form>
+        <form th:method="GET" th:action="@{/order/list}"
+              th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_USER')}">
+            <input class="navigation" type="submit" value="ЗАКАЗЫ">
+        </form>
+        <form th:method="GET" th:action="@{/profile}"
+              th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_USER')}">
+            <input class="navigation" type="submit" value="ПРОФИЛЬ">
         </form>
         <form th:method="POST" th:action="@{/logout}">
             <input class="navigation" type="submit" value="ВЫХОД">
@@ -32,7 +46,7 @@
 <h1>Детализация по заказу</h1>
 <hr>
 <div th:each="header :${order}">
-    <h2 th:text="'Заказ № ' + ${header.getNumber()}" th:href="@{/admin/order/{id}(id=${header.getId()})}"></h2>
+    <h2 th:text="'Заказ № ' + ${header.getNumber()}" th:href="@{/order/{id}(id=${header.getId()})}"></h2>
     <p th:text="'Дата заказа: ' + ${#temporals.format(header.getDateTime(), 'dd-MMM-yyyy')}"></p>
 
     <p th:text="'Пользователь: ' + ${header.getUser().getUsername()}"
@@ -44,7 +58,7 @@
 
     <p th:text="'Статус: ' + ${header.getStatus().getTitle()}"></p>
 
-    <form th:method="POST" th:action="@{/admin/order/{id}(id=${header.getId()})}" th:object="${order}"
+    <form th:method="POST" th:action="@{/order/{id}(id=${header.getId()})}" th:object="${order}"
           th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
         <div th:each="change : ${order}">
 
@@ -55,7 +69,7 @@
             <input type="hidden" th:name="number" th:value="${change.getNumber()}">
 
             <label>Изменить статус:</label>
-                <select th:field="*{status}">
+                <select class="input_space" th:field="*{status}">
                     <option th:each="status : ${T(com.example.bookstore.models.Status).values()}"
                             th:value="${status}" th:name="status" th:text="${status.getTitle()}" th:id="${status}"></option>
                 </select>
@@ -66,19 +80,19 @@
     <hr><br>
 </div>
 <div th:each="details : ${orderDetails}">
-    <div>
-        <div th:each="img : ${details.getProduct().getImageList()}">
 
+        <div th:each="img : ${details.getProduct().getImageList()}">
+            <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" class="product_img" height="200px">
         </div>
         <p th:text="${details.getProduct().getCategory().getName()}"></p>
         <h3 th:text="${details.getProduct().getTitle()}"></h3>
         <h4 th:text="${details.getProduct().getAuthor()}"></h4>
-        <p th:text="${details.getProduct().getPublishing_house()}"></p>
-        <p th:text="${details.getProduct().getYear_of_publishing()}"></p>
-        <p th:text="${details.getCount()}"></p>
-        <p th:text="${details.getPrice()}"></p>
+        <p th:text="'Издательство: ' + ${details.getProduct().getPublishing_house()}"></p>
+        <p th:text="'Год издания: ' + ${details.getProduct().getYear_of_publishing()}"></p>
+        <p th:text="'Количество: ' + ${details.getCount()}"></p>
+        <p th:text="'Цена: ' + ${details.getPrice()}"></p>
         <hr>
-    </div>
+
 </div>
 </body>
 </html>

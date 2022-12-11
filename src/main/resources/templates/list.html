@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/8083/8083385.png">
-    <title>Поиск</title>
+    <title>Каталог</title>
 </head>
 <style>
     header {
@@ -238,16 +238,21 @@
 <body>
 <h1>Каталог книг</h1>
 <hr><br>
-<div th:each="product : ${productList}" class="product_list">
-    <div class="product_card">
-        <div th:each="img : ${product.getImageList()}" class="product_img_block">
-            <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" class="product_img">
-        </div>
-        <div class="product_card_info">
-            <a th:text="${product.getTitle()}" th:href="@{/catalog/item/{id}(id=${product.getId()})}" class="product_title"></a>
-            <div th:text="${product.getAuthor()}" class="product_author"></div>
-            <div class="land_view_wrapper">
-                <div class="product_price"><span th:text="${product.getPrice()} + ' ₽'" class="product_price_value"></span></div>
+
+<div class="container">
+    <div class="row">
+        <div class="card" style="width: 20rem;" th:each="product : ${productList}">
+            <div class="card-body">
+                <div th:each="img : ${product.getImageList()}" class="product_img_block">
+                    <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" class="product_img">
+                </div>
+                <div class='product_card_info'>
+                    <a th:text="${product.getTitle()}" th:href="@{/catalog/item/{id}(id=${product.getId()})}" class="product_title"></a>
+                    <div th:text="${product.getAuthor()}" class="product_author"></div>
+                    <div class="land_view_wrapper">
+                        <div class="product_price"><span th:text="${product.getPrice()} + ' ₽'" class="product_price_value"></span></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

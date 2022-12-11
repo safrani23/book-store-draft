@@ -54,28 +54,28 @@ public class AdminController {
         return "redirect:/users";
     }
 
-    @GetMapping("/admin/orders")
+    @GetMapping("/orders")
     public String ordersList(Model model){
         model.addAttribute("ordersList", orderRepository.findAll());
         return "admin/orders";
     }
 
-    @GetMapping("/admin/order/{id}")
+    @GetMapping("/order/{id}")
     public String orderStatus(@PathVariable("id") int id, Model model){
         model.addAttribute("order", orderService.getOrderById(id));
         model.addAttribute("orderDetails", orderDetailRepository.getReferenceById(id));
         return "admin/order-details";
     }
 
-    @PostMapping("/admin/order/{id}")
+    @PostMapping("/order/{id}")
     public String orderStatus(
             @ModelAttribute("order") Order order,
             @PathVariable("id") int id){
         orderService.updateOrderStatus(id, order);
-        return "redirect:/admin/orders";
+        return "redirect:/orders";
     }
 
-    @GetMapping("/admin/order/search")
+    @GetMapping("/order/search")
     public String orderStatus(
             @RequestParam(value = "number", required = false, defaultValue = "") String number, Model model){
         List<Order> orderList = orderRepository.findByOrderNumber(number);

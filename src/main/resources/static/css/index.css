@@ -22,7 +22,7 @@ header {
 
 nav {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     justify-self: end;
     align-self: center;
     grid-gap: 20px;
@@ -94,14 +94,6 @@ header {
     padding-right: 30px;
 }
 
-nav {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    justify-self: end;
-    align-self: center;
-    grid-gap: 20px;
-}
-
 .navigation {
     font-size: 18px;
     color: #ffffff;
@@ -159,7 +151,19 @@ h1 {
     color: #7658BF;
 }
 
-label {
+h2 {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 24px;
+    color: #7658BF;
+}
+
+h3 {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 22px;
+    color: #7658BF;
+}
+
+label, span {
     font-family: "Segoe UI", sans-serif;
     font-size: 14px;
     color: #7658BF;
