@@ -2,8 +2,8 @@
 
 # Итоговый проект на тему: Интернет-магазин книг "Book Store"
 
-### PostgreSQL 14 script для Database: bookstore
-* Скрипт для приложения - [db.zip](https://github.com/safrani23/book-store-draft/files/10202271/db.zip)
+### Database PostgreSQL 14
+* [db.zip](https://github.com/safrani23/book-store-draft/files/10202271/db.zip) - script, Database: 'bookstore'
 
 ### Презентация проекта на итоговой аттестации
 * [Итоговый проект - Book Store.pdf](https://github.com/safrani23/book-store-draft/files/10202553/-.Book.Store.pdf)<br>
@@ -11,9 +11,9 @@
 
 ### Демонстрация программы
 
-* https://youtu.be/ZOMVqxqn1Do - Демо Интернет-магазина Book Store (аноним и зарег. пользователь)
-* https://youtu.be/8rXg68WmIAY - Демо Интернет-магазина Book Store (администратор)
-* [Demo_BookStore.pdf](https://github.com/safrani23/book-store-draft/files/10202953/Demo_BookStore.pdf) - sreenshots
+* https://youtu.be/ZOMVqxqn1Do - видеозапись 1: 'Демо Интернет-магазина Book Store (аноним и зарег. пользователь)'
+* https://youtu.be/8rXg68WmIAY - видеозапись 2: 'Демо Интернет-магазина Book Store (администратор)'
+* [demoBookStore.pdf](https://github.com/safrani23/book-store-draft/files/10202969/demoBookStore.pdf) - sreenshots для демонстрации проекта
 
 ### Тестовые данные
-* Ресурсы для приложения - [src.zip](https://github.com/safrani23/book-store-draft/files/10202903/src.zip)
+* [src.zip](https://github.com/safrani23/book-store-draft/files/10202903/src.zip) - ресурсы (товары)
