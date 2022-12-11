@@ -289,7 +289,7 @@
 <hr><br>
 <form th:action="@{/product/add}"
       th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
-    <button class="add_btn">Добавить</button>
+    <button class='product_card_button'>Добавить</button>
 </form>
 <br>
 
@@ -306,12 +306,12 @@
 
                 <form th:method="GET" th:action="@{/basket/{id}/add(id=${product.getId()})}"
                       th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_USER')}">
-                    <button class="add_btn">Купить</button>
+                    <button class='product_card_button'>Купить</button>
                 </form>
 
                 <div class='product_card_footer'
                       th:if="${#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}">
-                    <form class="add_btn" th:method="GET" th:action="@{/product/{id}/edit(id=${product.getId()})}">
+                    <form class='product_btn edit' th:method="GET" th:action="@{/product/{id}/edit(id=${product.getId()})}">
                         <button class='product_card_button'>Редактировать</button>
                     </form>
 
