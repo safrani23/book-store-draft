@@ -80,19 +80,19 @@
     <hr><br>
 </div>
 <div th:each="details : ${orderDetails}">
-    <div>
+
         <div th:each="img : ${details.getProduct().getImageList()}">
             <img th:src="'/img/' + ${img.getFileName()}" alt="product_img" class="product_img" height="200px">
         </div>
         <p th:text="${details.getProduct().getCategory().getName()}"></p>
         <h3 th:text="${details.getProduct().getTitle()}"></h3>
         <h4 th:text="${details.getProduct().getAuthor()}"></h4>
-        <p th:text="${details.getProduct().getPublishing_house()}"></p>
-        <p th:text="${details.getProduct().getYear_of_publishing()}"></p>
-        <p th:text="${details.getCount()}"></p>
-        <p th:text="${details.getPrice()}"></p>
+        <p th:text="'Издательство: ' + ${details.getProduct().getPublishing_house()}"></p>
+        <p th:text="'Год издания: ' + ${details.getProduct().getYear_of_publishing()}"></p>
+        <p th:text="'Количество: ' + ${details.getCount()}"></p>
+        <p th:text="'Цена: ' + ${details.getPrice()}"></p>
         <hr>
-    </div>
+
 </div>
 </body>
 </html>

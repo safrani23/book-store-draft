@@ -27,7 +27,7 @@ public class OrderController {
     @GetMapping("/order/create")
     public String order(){
         orderService.createOrder();
-        return "redirect:/orders";
+        return "redirect:/order/list";
     }
 
     @GetMapping("/order/list")
