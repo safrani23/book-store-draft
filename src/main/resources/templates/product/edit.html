@@ -163,6 +163,10 @@
         <input class="logo" type="submit" value="Book Store">
     </form>
     <nav>
+        <form th:method="GET" th:action="@{/search}">
+            <input class="navigation" type="submit" value="ПОИСК">
+        </form>
+
         <form th:method="GET" th:action="@{/catalog}">
             <input class="navigation" type="submit" value="КАТАЛОГ">
         </form>
